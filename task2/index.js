@@ -45,10 +45,11 @@ addItems()
 
 
 // every sec update time in control panel
-(() => {
-    setDate()
-    setInterval(setDate, 1000)
-})()
+
+setDate()
+setInterval(setDate, 1000)
+
+
 
 // open modal logic start
 
