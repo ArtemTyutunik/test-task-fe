@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #c9c9c9;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.country {
+    width: 300px;
+    height: auto;
+    margin: 25px 0;
+}
+
+.ukraine div {
+    width: 100%;
+    height: 75px;
+}
+
+.ukraine div:nth-child(1) {
+    background-color: blue;
+}
+
+.ukraine div:nth-child(2) {
+    background-color: yellow;
+}
+
+.japan div {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
+.japan .circle {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: rgba(175, 26, 45,1);
+}
+
