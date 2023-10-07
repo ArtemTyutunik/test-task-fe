@@ -5,6 +5,7 @@
 .container {
     width: 80%;
     margin: 0 auto;
+    margin-top: 25px;
 }
 
 .gallery {
@@ -35,4 +36,10 @@
     transform: rotate(45deg);
     transition: transform 0.8s linear;
 }
+
+.controls {
+    margin: 20px 0;
+}
+
+
 
