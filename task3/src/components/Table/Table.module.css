@@ -1,0 +1,43 @@
+
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+table {
+    border: 2px solid forestgreen;
+    width: 800px;
+    min-height: 100px;
+}
+
+th {
+    border: 2px solid black;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    padding: 5px 15px;
+}
+
+td {
+    text-align: center;
+}
+
+tbody td {
+    padding: 15px 0;
+}
+
+tbody td:nth-child(2) {
+    min-width: 200px;
+}
+
+tbody td:nth-child(3) {
+    min-width: 100px;
+}
+
+.highlightRow {
+    background: #cccccc;
+}
