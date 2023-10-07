@@ -1,16 +1,21 @@
 import images from './data.js';
 import {galleryItemTemplate, modalTemplate} from './templates.js';
 
+const hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || [];
+
 const galleryContainer = document.querySelector('.gallery');
+const itemCollection = document.getElementsByClassName('gallery-item');
+const restoreBtn = document.getElementById('restore-btn');
 
 const updateAmount = () => {
-    const itemCollection = document.querySelectorAll('.gallery-item');
     document.querySelector('.amount').innerHTML = itemCollection.length + ''
 }
 
 const addItems = () => {
     galleryContainer.innerHTML = '';
     images.forEach((img) => {
+        if (hiddenImages.includes(img.id)) return;
+
         galleryContainer.innerHTML += galleryItemTemplate(img);
     })
     updateAmount();
@@ -34,7 +39,7 @@ const setDate = () => {
 
 (() => {
     setDate()
-    setInterval(setDate, 60_000)
+    setInterval(setDate, 1000)
 })()
 
 
@@ -61,6 +66,40 @@ const openModal = (e) => {
 }
 
 galleryContainer.addEventListener('click', openModal)
+
+const saveDeleteId = (id) => {
+    hiddenImages.push(id);
+    localStorage.setItem('hiddenImages', JSON.stringify(hiddenImages));
+}
+
+const deleteItem = (e) => {
+    const target = e.target;
+    const parent = target.parentElement
+    if (parent.classList.contains('delete')) {
+        const id = parent.getAttribute('data-deleteId');
+
+        const targetImage = Array.from(itemCollection).find(item => {
+            return item.querySelector('.background').getAttribute('data-id') === id
+        })
+
+        if (targetImage) {
+            targetImage.remove();
+            saveDeleteId(id)
+            updateAmount()
+        }
+    }
+}
+
+galleryContainer.addEventListener('click', deleteItem)
+
+const restoreElements = () => {
+    hiddenImages.length = 0
+    localStorage.setItem('hiddenImages', JSON.stringify(hiddenImages))
+    addItems()
+}
+
+restoreBtn.addEventListener('click', restoreElements)
+
 
 
 

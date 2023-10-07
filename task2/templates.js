@@ -5,6 +5,9 @@ export const galleryItemTemplate  = (image) => {
         <div class="background" 
         style="background-image: url('${image.src}')" 
         data-id="${image.id}"></div>
+        <div class="delete" data-deleteId="${image.id}">
+            <img src="images/delete.svg" alt="delete"/>
+        </div>
     </div>`
 }
 
