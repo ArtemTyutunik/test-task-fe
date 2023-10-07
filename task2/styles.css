@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gallery-item {
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item .background {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-size: cover;
+    border: 5px solid #333;
+    background: no-repeat center;
+    cursor: pointer;
+}
+
+.gallery-item .background:hover {
+    border: 5px solid yellow;
+    transform: rotate(45deg);
+    transition: transform 0.8s linear;
+}
+
