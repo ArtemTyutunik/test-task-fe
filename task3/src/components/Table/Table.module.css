@@ -1,15 +1,15 @@
 
 
 .tableContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
+    overflow: scroll;
+    text-align: center;
 }
 
 
 table {
     border: 2px solid forestgreen;
-    width: 800px;
+    width: 100%;
     min-height: 100px;
 }
 
@@ -40,4 +40,17 @@ tbody td:nth-child(3) {
 
 .highlightRow {
     background: #cccccc;
+}
+
+@media screen and (max-width: 800px) {
+    tbody td:nth-child(2) {
+        min-width: 100px;
+    }
+
+    tbody td:nth-child(3) {
+        min-width: 50px;
+    }
+    table * {
+        font-size: 13px;
+    }
 }

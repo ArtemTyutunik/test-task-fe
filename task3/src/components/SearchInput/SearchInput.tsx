@@ -10,7 +10,14 @@ const SearchInput = memo((props: Props) => {
     const {onSearch, onReset} = props;
     const searchInputRef = React.useRef<HTMLInputElement | null>(null);
 
-    const onHandleSearch = () => {
+    useEffect(() => {
+        if (searchInputRef.current) {
+            searchInputRef.current!.focus()
+        }
+    }, [])
+
+    const onHandleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         if (searchInputRef.current) {
             onSearch(searchInputRef.current?.value as string);
         }
@@ -23,25 +30,21 @@ const SearchInput = memo((props: Props) => {
         }
     }
 
-    useEffect(() => {
-        if (searchInputRef.current) {
-            searchInputRef.current!.focus()
-        }
-    }, [])
-
     return (
-        <div className={styles.searchContainer}>
-            <input type="text" placeholder="Search..."  className={styles.searchInput} ref={searchInputRef}/>
-            <button className={styles.actionBtn + ' ' + styles.searchButton}
-                    onClick={onHandleSearch}
-            >
+        <form onSubmit={onHandleSearch} className={styles.searchContainer}>
+            <input type="text"
+                   placeholder="Search..."
+                   className={styles.searchInput}
+                   ref={searchInputRef}
+            />
+            <button type='submit' className={styles.actionBtn + ' ' + styles.searchButton}>
                 Search
             </button>
             <button onClick={onHandleReset}
-                className={styles.actionBtn + ' ' + styles.clearButton}>
+                    className={styles.actionBtn + ' ' + styles.clearButton}>
                 Clear
             </button>
-        </div>
+        </form>
     );
 });
 

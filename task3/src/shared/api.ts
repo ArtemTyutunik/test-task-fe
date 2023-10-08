@@ -1,4 +1,5 @@
 import {SearchResults} from "./types";
+import {removeDuplicates} from "./helpers";
 
 export const fetchSearchResults = async (query: string): Promise<SearchResults[]> => {
     const response = await fetch(`http://universities.hipolabs.com/search?country=${query}`);
@@ -6,16 +7,16 @@ export const fetchSearchResults = async (query: string): Promise<SearchResults[]
       throw new Error(response.statusText);
     }
 
-    return optimizeData(await response.json());
+    return optimizeData(removeDuplicates(await response.json()));
 }
 
-const optimizeData = (data: SearchResults[]) => {
+const optimizeData = (data: unknown[]) => {
     const result: SearchResults[] = [];
 
     data.forEach(item => {
         const temp = {}
         temp['name'] = item.name;
-        temp['alpha_two_code'] = item.alpha_two_code;
+        temp['alphaTwoCode'] = item.alpha_two_code;
         temp['country'] = item.country;
         temp['domains'] = item.domains;
         temp['stateProvince'] = item.stateProvince;

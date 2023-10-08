@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {memo, useCallback, useContext} from 'react';
 import {SearchResults} from "../../shared/types";
 import style from './Table.module.css';
+import TableCheckbox from "../TableCheckbox/TableCheckbox";
+import {SavedInfoContext} from "../../App/App";
 
 interface Props {
     data: SearchResults[];
@@ -8,8 +10,9 @@ interface Props {
     isError: boolean;
 }
 
-const Table = (props: Props) => {
+const Table = memo((props: Props) => {
     const {data, isLoading, isError} = props;
+    const {savedInfo} = useContext(SavedInfoContext);
 
     if (isError) {
         return <div className={style.tableContainer}> <p> Something went wrong</p> </div>;
@@ -22,6 +25,12 @@ const Table = (props: Props) => {
     if (data.length === 0) {
         return <div className={style.tableContainer}> <p> No results</p> </div>;
     }
+
+    const isChecked = (value: SearchResults) => {
+        return savedInfo.some(savedInfo => savedInfo.alphaTwoCode === value.alphaTwoCode
+            && savedInfo.name === value.name);
+    }
+
 
     return (
         <div className={style.tableContainer}>
@@ -38,28 +47,32 @@ const Table = (props: Props) => {
                             <tr key={val.name} className={highlightRow}>
                                 <td>{index + 1}</td>
                                 <td>{val.name}</td>
-                                <td>{val.alpha_two_code}</td>
+                                <td>{val.alphaTwoCode}</td>
                                 <td>{val.country}</td>
                                 <td>{val.domains.join(', ')}</td>
                                 <td>{val.stateProvince || '-'}</td>
                                 <td>
                                         {val.web_pages.map(page => (
-                                            <p>
-                                                <a href={page} key={page}>{page}</a>
+                                            <p key={page}>
+                                                <a href={page} >{page}</a>
                                             </p>
                                         ))}
+                                </td>
+                                <td>
+                                    <TableCheckbox isChecked={isChecked(val)}
+                                                   name={val.name}
+                                                   alphaTwoCode={val.alphaTwoCode}/>
                                 </td>
                             </tr>
                         )
                     })}
                 </tbody>
-
             </table>
         </div>
 
     );
-};
+});
 
-const names  = ['ID','Name',  'Alpha two code', 'Country', 'Domains', 'State province', 'Web pages'];
+const names  = ['ID','Name',  'Alpha two code', 'Country', 'Domains', 'State province', 'Web pages', 'Save in my list'];
 
 export default Table;
