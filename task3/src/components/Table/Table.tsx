@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useContext} from 'react';
+import {memo, useContext} from 'react';
 import {SearchResults} from "../../shared/types";
 import style from './Table.module.css';
 import TableCheckbox from "../TableCheckbox/TableCheckbox";
@@ -27,7 +27,7 @@ const Table = memo((props: Props) => {
     }
 
     const isChecked = (value: SearchResults) => {
-        return savedInfo.some(savedInfo => savedInfo.alphaTwoCode === value.alphaTwoCode
+        return savedInfo.some((savedInfo) => savedInfo.alphaTwoCode === value.alphaTwoCode
             && savedInfo.name === value.name);
     }
 
@@ -54,7 +54,7 @@ const Table = memo((props: Props) => {
                                 <td>
                                         {val.web_pages.map(page => (
                                             <p key={page}>
-                                                <a href={page} >{page}</a>
+                                                <a href={page} target='_blank'>{page}</a>
                                             </p>
                                         ))}
                                 </td>

@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import './App.module.css'
 import SearchInput from "../components/SearchInput/SearchInput";
 import styles from "./App.module.css"
 import {SavedInfo, SearchResults} from "../shared/types";
@@ -8,6 +7,9 @@ import Table from "../components/Table/Table";
 import {fetchSearchResults} from "../shared/api";
 import SavesCount from "../components/SavesCount/SavesCount";
 import {isInArray} from "../shared/helpers";
+
+import './App.module.css'
+
 
 const getInitialSavedInfo = (): SavedInfo[] => {
     return JSON.parse(localStorage.getItem('savedInfo') || '[]');
@@ -18,7 +20,7 @@ interface ContextProps {
     onSaveInList: (savedInfo: SavedInfo) => void
 }
 
-export const SavedInfoContext = React.createContext<ContextProps | null>(null);
+export const SavedInfoContext = React.createContext<ContextProps>(null!);
 
 function App() {
     const [searchResults, setSearchResults] = useState<SearchResults[]>([])

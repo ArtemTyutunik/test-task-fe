@@ -10,17 +10,13 @@ export const fetchSearchResults = async (query: string): Promise<SearchResults[]
     return optimizeData(removeDuplicates(await response.json()));
 }
 
-const optimizeData = (data: unknown[]) => {
+const optimizeData = (data:  any[]) => {
     const result: SearchResults[] = [];
 
     data.forEach(item => {
-        const temp = {}
-        temp['name'] = item.name;
-        temp['alphaTwoCode'] = item.alpha_two_code;
-        temp['country'] = item.country;
-        temp['domains'] = item.domains;
-        temp['stateProvince'] = item.stateProvince;
-        temp['web_pages'] = item.web_pages;
+        const temp = {...item, alphaTwoCode: item.alpha_two_code};
+        delete temp.alpha_two_code;
+
         result.push(temp as SearchResults);
     })
 

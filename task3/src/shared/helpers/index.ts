@@ -15,7 +15,7 @@ export const removeDuplicates = (array: SearchResults[]): SearchResults[] => {
 }
 
 
-export const isInArray = (item: SearchResults, array: SavedInfo[]): boolean => {
+export const isInArray = (item: SearchResults | SavedInfo, array: SavedInfo[]): boolean => {
     return Boolean(array.find((savedInfo) => savedInfo.name === item.name
         && savedInfo.alphaTwoCode === item.alphaTwoCode));
 }
