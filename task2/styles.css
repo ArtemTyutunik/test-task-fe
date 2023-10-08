@@ -41,6 +41,10 @@ body {
     margin-bottom: 10px;
 }
 
+.gallery-item:nth-child(4n + 1) .background{
+    border-color: red;
+}
+
 .gallery-item .background:hover {
     border: 5px solid yellow;
     transform: rotate(45deg);
@@ -104,11 +108,16 @@ body {
     .gallery-item {
         width: 23%;
     }
+
 }
 
 @media screen and (max-width: 900px) {
     .gallery-item {
         width: 48%;
+    }
+
+    .gallery-item:nth-child(odd) .background {
+        border-color: red;
     }
 
     .gallery-item .background {
@@ -120,6 +129,11 @@ body {
 @media screen and (max-width: 500px) {
     .gallery-item {
         width: 100%;
+    }
+
+    .gallery-item:nth-child(odd) .background {
+        border-color: #333333;
+
     }
 
     .gallery-item .background {
